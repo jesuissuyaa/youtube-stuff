@@ -1,6 +1,5 @@
-txt = """
 コイキングがレベル20になると進化する、大器晩成型ポケモンの代表格。
-世界一弱いと言われるコイキングが、長いレベルアップの末強力なポケモンに進化した。
+世界一弱いと言われるコイキングが、長いレベルアップの末、強力なポケモンに進化した。
 
 青く長い体と三叉の角、顎から延びる二本のひげなど、東洋の龍を彷彿とさせる美しい外観を持つ。
 
@@ -28,23 +27,3 @@ txt = """
 第三に、耐久力と弱点の少なさも兼ね揃えている為、各地の伝説ポケモンやぬしポケモンにぶつけても壁役として重宝する。
 第四に、なみのりやたきのぼり、うずしおといったみずタイプのひでんマシンをたくさん覚えてくれる為、ダンジョンの攻略でも役に立つ。
 旅のパーティで味方を探すのに迷ったら「とりあえずコレ」程度で採用しても良い程である。
-"""
-
-# set pause length
-PAUSE_PERIOD = 1
-PAUSE_COMMA = 0.5
-PAUSE_PARAGRAPH = 1.5
-
-# wrap with tags
-txt = "<speak>" + txt + "</speak>"
-
-# add break tags
-txt = txt.replace("。\n", f'<break time="{PAUSE_PERIOD}" />\n')
-txt = txt.replace("、", f'<break time="{PAUSE_COMMA}" />\n')
-txt = txt.replace("\n\n", f'<break time="{PAUSE_PARAGRAPH}" />\n')
-
-# write to file 
-f = open("ssml.txt", "w")
-f.write(txt)
-f.close()
-print(txt)
