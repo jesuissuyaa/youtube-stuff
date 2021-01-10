@@ -1,56 +1,84 @@
-txt = """
-コイキングがレベル20になると進化する、大器晩成型ポケモンの代表格。
-世界一弱いと言われるコイキングが、長いレベルアップの末強力なポケモンに進化した。
-
-青く長い体と三叉の角、顎から延びる二本のひげなど、東洋の龍を彷彿とさせる美しい外観を持つ。
-
-進化の際に脳細胞の構造が組み変わったため、コイキングの頃とは打って変わって凶暴性が非常に強くなっている。それは一度怒れば村も野山も、街も都市も辺り一面を焼き払い破壊し尽くさないと血が収まらないほどで、人々の争いに呼応して暴れ出すという性質がある。
-ちなみに現実でも脳細胞が組み変わる生物は沢山いて、代表例としては蛹になる昆虫がそれにあたる。
-
-めったに姿を現さないとされるが、ゲームでは矛盾しており水道で野生で現れることも珍しくはなく、シンオウ地方に至ってはほぼ全域で釣れる。
-恐らく進化前の生存能力故であろう。
-しかし最近、とある地方ではギャラドスにとって苦手と呼べるポケモンが登場し始めたようだ。
-
-おそらくは鯉のぼりをモデルにしていると思われる。いわゆる登竜門の話である。
-外見の元ネタは非常に分かりやすいのだが、実はポケモンの中で数少ない明確な名前の由来が無いポケモン。
-（ソース：ポケモンデザイン担当杉森健氏のtwitter上での発言）
-青くて長いかっこよく王道で正統派な美のデザインは、凶暴さを感じさせる中に愛嬌もあり、人気が高い。ちなみに性別による見た目の違いがあり、オスのひげは青色、メスのひげは白色となっている。
-
-外見やモチーフからドラゴンタイプを連想させるが、初代ではドラゴンは希少な存在にしたかったのかひこうタイプ。しかも外見は完全に水棲生物なので、飛べるなんてこともなく風や空に関する話も全くない。
-みず・ドラゴンタイプの相性と当時のドラゴンタイプの貧弱さも考えると、この方が良かったのかもしれない。
-
-『赤・緑』の頃は、ゲーム中で「はかいこうせん」をガンガン使ってくるイメージがあり、古参ファンからは『Mr.はかいこうせん』のようなイメージが定着している。
-ただし『ダイヤモンド・パール』以降では「はかいこうせん」は特殊技になってしまっており、特攻の高くないギャラドスでは大してダメージを与えられなくなっている。同威力で同じような効果の物理技「ギガインパクト」もあるのだが、こちらはレベルアップでは覚えられない。
-
-後述する性能面からか、シナリオ攻略でも非常に頼りになるポケモンでもある。
-理由としては第一に、シリーズを通して入手しやすく、進化も早い。
-第二に、高い攻撃とそこそこの素早さを持つのでサクサク相手を倒していける。
-第三に、耐久力と弱点の少なさも兼ね揃えている為、各地の伝説ポケモンやぬしポケモンにぶつけても壁役として重宝する。
-第四に、なみのりやたきのぼり、うずしおといったみずタイプのひでんマシンをたくさん覚えてくれる為、ダンジョンの攻略でも役に立つ。
-旅のパーティで味方を探すのに迷ったら「とりあえずコレ」程度で採用しても良い程である。
-"""
+import re
 
 # set pause length
-PAUSE_PERIOD = 1
-PAUSE_COMMA = 0.5
-PAUSE_PARAGRAPH = 1.5
+PAUSE_WHITESPACE = 0.1
+PAUSE_NEWLINE = 0.2
+PAUSE_PERIOD = 0.8
+PAUSE_COMMA = 0.2
+# PAUSE_PARAGRAPH = 1.0
+
+
+CHANNEL_NAME = "わんぽけ"
+MAX_CHARS = 1000
+
+# check if string contains only hiragana & space
+def is_hiragana_sentence(str):
+    if " " not in str:
+        return False
+    re_hiragana = re.compile(r'^[あ-ん 。]+$')
+    return re_hiragana.fullmatch(str)
+
+def markup(txt):
+    # wrap with tags
+    txt = "<speak>" + txt + "</speak>"
+
+    # wrap hiragana-only sentence lines
+    # lines = txt.split('\n')
+    # lines = map(lambda x: f'<s>{x}</s>' if is_hiragana_sentence(x) else x, lines)
+    # txt = ('\n').join(lines)
+
+    # add break tags
+    # txt = txt.replace(" ", f'<break time="{PAUSE_WHITESPACE}s" />')
+    txt = txt.replace("\n", f'<break time="{PAUSE_NEWLINE}s" />')
+    txt = txt.replace("。", f'<break time="{PAUSE_PERIOD}s" />')
+    txt = txt.replace("、", f'<break time="{PAUSE_COMMA}s" />')
+    # txt = txt.replace("\n\n", f'<break time="{PAUSE_PARAGRAPH}s" />')
+
+    # pokemon names
+    txt = txt.replace("フシギバナ", '<phoneme alphabet="x-amazon-pron-kana" ph="フ\'シギバナ">フシギバナ</phoneme>')
+
+    return txt
+
 
 # open file
 f = open("text.txt", "r")
 txt = f.read()
 f.close()
 
+lines = txt.splitlines()
+txt = ""
 
-# wrap with tags
-txt = "<speak>" + txt + "</speak>"
+# move to beginning of speech i.e. channel name
+i = 0
+for line in lines:
+    if CHANNEL_NAME in line:
+       break
+    i = i + 1
 
-# add break tags
-txt = txt.replace("。\n", f'<break time="{PAUSE_PERIOD}s" />')
-txt = txt.replace("、", f'<break time="{PAUSE_COMMA}s" />')
-txt = txt.replace("\n\n", f'<break time="{PAUSE_PARAGRAPH}s" />')
+# remove comment lines
+for line in lines[i:]:   
+    if not line.startswith('#'):
+        txt = txt + line + '\n'
 
-# write to file 
-f = open("ssml.txt", "w")
-f.write(txt)
-f.close()
+lines = txt.splitlines()
+
+file_index = 1
+line_index = 0
+while line_index < len(lines):
+    txt_out = ""
+    while(len(txt_out) < MAX_CHARS and line_index < len(lines)):
+        txt_out += lines[line_index] + '\n'
+        line_index += 1
+
+    # markup
+    txt_out = markup(txt_out)
+
+    # write to file
+    f = open(f'ssml-{file_index}.txt', "w")
+    f.write(txt_out)
+    f.close()
+
+    # update indices
+    file_index += 1
+    
 print('DONE!')
