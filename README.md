@@ -2,6 +2,10 @@
 
 AWS console: https://us-east-2.console.aws.amazon.com/polly/home/SynthesizeSpeech
 
+## READ BEFORE CONVERTING
+
+- UPLOAD LEXICON
+
 ## TODO
 
 make a list of pokemon names into JSON
@@ -12,8 +16,6 @@ make a list of pokemon names into JSON
 account is `wanpoke888@gmail.com`
 - pokemon-code: stuff that uses code
 - pokemon-media: video & audio
-
-###
 
 ## workflow
 

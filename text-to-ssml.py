@@ -1,4 +1,5 @@
 import re
+import json
 
 # set pause length
 PAUSE_WHITESPACE = 0.1
@@ -34,9 +35,19 @@ def markup(txt):
     txt = txt.replace("、", f'<break time="{PAUSE_COMMA}s" />')
     # txt = txt.replace("\n\n", f'<break time="{PAUSE_PARAGRAPH}s" />')
 
-    # pokemon names
-    txt = txt.replace("フシギバナ", '<phoneme alphabet="x-amazon-pron-kana" ph="フ\'シギバナ">フシギバナ</phoneme>')
+    # load lexicon by x-amazon-pron-kana
+    f = open('lexicon-kana.json')
+    data = json.load(f)
+    f.close()
+    for lexeme in data:
+        g = lexeme['grapheme']
+        p = lexeme['phoneme']
+        txt = txt.replace(g, f'<phoneme alphabet="x-amazon-pron-kana" ph="{p}">{g}</phoneme>')
+    
+    # txt = txt.replace("フシギバナ", '<phoneme alphabet="x-amazon-pron-kana" ph="フ\'シギバナ">フシギバナ</phoneme>')
 
+    # other rules
+    txt = txt.replace("DX", f'<w>DX</w>')
     return txt
 
 
@@ -44,6 +55,7 @@ def markup(txt):
 f = open("text.txt", "r")
 txt = f.read()
 f.close()
+
 
 lines = txt.splitlines()
 txt = ""
