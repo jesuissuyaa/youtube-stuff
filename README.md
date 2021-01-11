@@ -6,6 +6,15 @@ AWS console: https://us-east-2.console.aws.amazon.com/polly/home/SynthesizeSpeec
 
 make a list of pokemon names into JSON
 
+## file locations
+
+- Google Drive: store final videos & info to share  
+account is `wanpoke888@gmail.com`
+- pokemon-code: stuff that uses code
+- pokemon-media: video & audio
+
+###
+
 ## workflow
 
 ### updated
