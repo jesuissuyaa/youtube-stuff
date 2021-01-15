@@ -31,8 +31,8 @@ def markup(txt):
     # add break tags
     # txt = txt.replace(" ", f'<break time="{PAUSE_WHITESPACE}s" />')
     txt = txt.replace("\n", f'<break time="{PAUSE_NEWLINE}s" />')
-    txt = txt.replace("。", f'<break time="{PAUSE_PERIOD}s" />')
-    txt = txt.replace("、", f'<break time="{PAUSE_COMMA}s" />')
+    # txt = txt.replace("。", f'<break time="{PAUSE_PERIOD}s" />')
+    # txt = txt.replace("、", f'<break time="{PAUSE_COMMA}s" />')
     # txt = txt.replace("\n\n", f'<break time="{PAUSE_PARAGRAPH}s" />')
 
     # load lexicon by x-amazon-pron-kana
