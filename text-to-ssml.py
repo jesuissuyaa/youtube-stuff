@@ -10,7 +10,7 @@ PAUSE_COMMA = 0.2
 
 
 CHANNEL_NAME = "わんぽけ"
-MAX_CHARS = 1000
+MAX_CHARS = 800
 
 # check if string contains only hiragana & space
 def is_hiragana_sentence(str):
@@ -29,7 +29,7 @@ def markup(txt):
     # txt = ('\n').join(lines)
 
     # add break tags
-    # txt = txt.replace(" ", f'<break time="{PAUSE_WHITESPACE}s" />')
+    txt = txt.replace(" ", f'<break time="{PAUSE_WHITESPACE}s" />')
     txt = txt.replace("\n", f'<break time="{PAUSE_NEWLINE}s" />')
     # txt = txt.replace("。", f'<break time="{PAUSE_PERIOD}s" />')
     # txt = txt.replace("、", f'<break time="{PAUSE_COMMA}s" />')
@@ -48,6 +48,11 @@ def markup(txt):
 
     # other rules
     txt = txt.replace("DX", f'<w>DX</w>')
+    # replace space with commas for titles
+    titles = re.findall(r'『.+?』', txt)
+    for t in titles:
+        t2 = t.replace(" ", "、")
+        txt = txt.replace(t, t2)
     return txt
 
 
@@ -69,7 +74,7 @@ for line in lines:
 
 # remove comment lines
 for line in lines[i:]:   
-    if not line.startswith('#'):
+    if not line.startswith(('#', '＃')):
         txt = txt + line + '\n'
 
 lines = txt.splitlines()

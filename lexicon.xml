@@ -4,7 +4,11 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2005/01/pronunciation-lexicon 
         http://www.w3.org/TR/2007/CR-pronunciation-lexicon-20071212/pls.xsd" alphabet="ipa" xml:lang="ja-JP">
   <lexeme>
-    <!-- nouns -->
+    <grapheme>数少ない</grapheme>
+    <alias>かずすくない</alias>
+  </lexeme>
+  <!-- common nouns -->
+  <lexeme>
     <grapheme>Lv.</grapheme>
     <alias>レベル</alias>
   </lexeme>
@@ -13,12 +17,32 @@
     <alias>しようわざ</alias>
   </lexeme>
   <lexeme>
+    <grapheme>シティ</grapheme>
+    <alias>city</alias>
+  </lexeme>
+  <!-- skills -->
+  <lexeme>
     <grapheme>じしん</grapheme>
     <alias>地震</alias>
   </lexeme>
-   <lexeme>
+  <lexeme>
     <grapheme>おうじゃ</grapheme>
     <alias>王者</alias>
   </lexeme>
-
+  <lexeme>
+    <grapheme>なみのり</grapheme>
+    <alias>波乗り</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>なまける</grapheme>
+    <alias>怠ける</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>ぼうぎょ</grapheme>
+    <alias>防御</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>とくぼう</grapheme>
+    <alias>特防</alias>
+  </lexeme>
 </lexicon>

@@ -2,6 +2,13 @@
 
 AWS console: https://us-east-2.console.aws.amazon.com/polly/home/SynthesizeSpeech
 
+## ライター用仕様
+
+- 「、」「。」では間があく（APIデフォルトの設定）
+- 改行では0.2秒の間があく
+- 『』の中のスペースは「、」に置換して読ませてる
+    e.g. 『劇場版ポケットモンスター 幻のポケモン ルギア爆誕』→『劇場版ポケットモンスター、幻のポケモン、ルギア爆誕』として読む
+
 ## READ BEFORE CONVERTING
 
 - UPLOAD LEXICON
