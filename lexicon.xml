@@ -7,10 +7,15 @@
     <grapheme>数少ない</grapheme>
     <alias>かずすくない</alias>
   </lexeme>
+
   <!-- common nouns -->
   <lexeme>
     <grapheme>Lv.</grapheme>
     <alias>レベル</alias>
+  </lexeme>
+  <lexeme>
+    <grapheme>TVアニメ</grapheme>
+    <alias>テレビアニメ</alias>
   </lexeme>
   <lexeme>
     <grapheme>使用技</grapheme>

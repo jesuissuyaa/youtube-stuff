@@ -27,6 +27,13 @@ def markup(txt):
     # lines = txt.split('\n')
     # lines = map(lambda x: f'<s>{x}</s>' if is_hiragana_sentence(x) else x, lines)
     # txt = ('\n').join(lines)
+    
+    # replace space with commas for titles
+    titles = re.findall(r'『.+?』', txt)
+    for t in titles:
+        t2 = t.replace(" ", "、")
+        txt = txt.replace(t, t2)
+
 
     # add break tags
     txt = txt.replace(" ", f'<break time="{PAUSE_WHITESPACE}s" />')
@@ -34,6 +41,7 @@ def markup(txt):
     # txt = txt.replace("。", f'<break time="{PAUSE_PERIOD}s" />')
     # txt = txt.replace("、", f'<break time="{PAUSE_COMMA}s" />')
     # txt = txt.replace("\n\n", f'<break time="{PAUSE_PARAGRAPH}s" />')
+
 
     # load lexicon by x-amazon-pron-kana
     f = open('lexicon-kana.json')
@@ -44,15 +52,6 @@ def markup(txt):
         p = lexeme['phoneme']
         txt = txt.replace(g, f'<phoneme alphabet="x-amazon-pron-kana" ph="{p}">{g}</phoneme>')
     
-    # txt = txt.replace("フシギバナ", '<phoneme alphabet="x-amazon-pron-kana" ph="フ\'シギバナ">フシギバナ</phoneme>')
-
-    # other rules
-    txt = txt.replace("DX", f'<w>DX</w>')
-    # replace space with commas for titles
-    titles = re.findall(r'『.+?』', txt)
-    for t in titles:
-        t2 = t.replace(" ", "、")
-        txt = txt.replace(t, t2)
     return txt
 
 
